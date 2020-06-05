@@ -73,6 +73,10 @@ a{
     font-family: inherit;
     text-align: center;
 
+    transition-property: background-color, color;
+    transition-duration: 2s;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+
 }
 .icon-send{
     margin-left: 10px;
@@ -113,11 +117,11 @@ a{
     align-items: center;
    
 }
-.header{ 
+/*.header{ 
     position: sticky;
     top: 0;
 
-}
+}*/
 
 .navigation{
     display: flex;
@@ -128,7 +132,8 @@ a{
 }
 .site-nav-item a {
     padding-top: 32px;
-    padding-bottom: 28px; 
+    padding-bottom: 32px; 
+    position: relative;
 }
 
 .site-nav-item {
@@ -146,6 +151,52 @@ a{
 .site-nav :hover,
 .site-nav :focus {color: var(--accent-color);}
 .site-nav .link.current {color: var(--accent-color);}
+
+.site-nav .link.current::after{
+    content: "";
+    display: flex;
+    width: 100%;
+    height: 4px;
+    
+    background-color: var(--accent-color);
+    border-radius: 4px;
+    position: absolute;
+    bottom: 0;
+
+    transform-origin: center;
+}
+.site-nav-item::after{
+    content: "";
+    display: flex;
+    width: 100%;
+    height: 4px;
+    
+    background-color: var(--accent-color);
+    border-radius: 4px;
+    position: absolute;
+    bottom: 0;
+
+    opacity: 0;
+    transform: scaleX(0);
+    transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+}
+
+.site-nav-item :hover::after {
+    content: "";
+    display: flex;
+    width: 100%;
+    height: 4px;
+    
+    background-color: var(--accent-color);
+    border-radius: 4px;
+    position: absolute;
+    bottom: 0;
+
+    opacity: 1;
+    transform: scaleX(1);
+}
 
 
 /*-----address---*/
@@ -165,7 +216,8 @@ a{
     font-weight: 500;
     font-size: 14px;
     line-height: 1.14;
-    letter-spacing: 0.02em;}
+    letter-spacing: 0.02em;
+}
 
     .contacts .icon-envelope {
         position: relative;
@@ -184,7 +236,9 @@ a{
         margin-right: 10px;
         fill: currentColor;
     }
-
+.contact-link{
+    transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
 
 .contact-link:hover,
 .contact-link:focus {color: var(--accent-color);}
@@ -274,6 +328,7 @@ a{
     height: 120px; 
     background-color: var(--light-grey-color);
     margin-bottom: 30px;
+
 }
 /*
 .advantages-item::before{
@@ -349,13 +404,29 @@ a{
     display: flex;
 }
 .specializing-item {
+    position: relative;
     overflow: hidden;
+    margin: 0;
     width: 370px;
+    height: 294px;
     margin-right: 30px;
-    border-radius: 5px;
+    
     
     /*background: url(./images/laptop.png) no-repeat center;*/
-    background-color: #757575;
+   
+}
+.specializing-item:last-child{
+    margin-right: 0px;
+}
+
+.specializing-image{
+    display: inline-block;
+    margin: 0;
+}
+.specializing-text {
+    width: 370px;
+    height: 70px;   
+    background: rgba(47, 48, 58, 0.8);
     color: var(--on-background-text-color);
     font-weight: bold;
     font-size: 14px;
@@ -363,11 +434,16 @@ a{
     text-align: center;
     letter-spacing: 0.03em;
     text-transform: uppercase;
-}
-.specializing .item:last-child{
-    margin-right: 0px;
-}
+    margin: 0;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
+    position: absolute;
+    bottom: 0;
+    
+}
 
 
 /*------------section team------------*/
@@ -377,7 +453,7 @@ a{
 }
 .member {
     overflow: hidden;
-    border-radius: 4px;
+
     width: 278px;
     margin-right: 30px;
 
@@ -426,7 +502,20 @@ a{
     height: 44px;
     border-radius: 50%;
     fill: #AFB1B8;
+
+    transition-property: fill;
+    transition-duration: 2s;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+
+
+    transition: 2s cubic-bezier(0.4, 0, 0.2, 1);
+
     background-color: var(--on-background-text-color);
+
+    transition-property: background-color;
+    transition-duration: 2s;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+
 }
 
 .icon-background:hover{
@@ -453,6 +542,8 @@ a{
     border-radius: 4px;
 
     fill: #AFB1B8;
+
+    transition: 1s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .clients-item:hover{
     border-color: var(--accent-color);
@@ -501,6 +592,14 @@ a{
      border-radius: 50%;
      fill: #AFB1B8;
      background-color: rgba(255, 255, 255, 0.1);
+     transition-property: fill;
+     transition-duration: 250ms;
+     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+     transition-property: background-color;
+     transition-duration: 250ms;
+     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+     
+    
  }
  
  .footer-icon-background:hover{
@@ -594,6 +693,12 @@ a{
     letter-spacing: 0.03em;
     text-align: center;
 }
+.filter-button:hover{
+    background-color: var(--accent-color);
+    color: var(--on-background-text-color);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.12), 0px 1px 2px rgba(0, 0, 0, 0.08), 0px 3px 1px rgba(0, 0, 0, 0.1);
+border-radius: 4px;
+}
 
 
 /*examples*/
@@ -604,12 +709,7 @@ a{
 }
 .example-item{
     width: 370px;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    overflow: hidden;
 }
-
-
 
 .example-item:not(:nth-child(3n))
 {
@@ -620,12 +720,14 @@ a{
 }
 
 .example-item:hover{
-    border-radius: 5px;
+
     box-shadow: 1px 4px 6px rgba(0, 0, 0, 0.16), 0px 4px 4px rgba(0, 0, 0, 0.06), 0px 1px 1px rgba(0, 0, 0, 0.12);
 }
 
+
 .card-image{
     display: block;
+    overflow: hidden;
 }
 
 .card-content{
@@ -637,10 +739,7 @@ a{
 
     border-bottom: 1px solid #EEEEEE;
     border-left: 1px solid #EEEEEE;
-    border-right: 1px solid #EEEEEE;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
-    
+    border-right: 1px solid #EEEEEE;    
 }
 
 .example-item h2{
@@ -664,10 +763,32 @@ a{
     letter-spacing: 0.03em;
 }
 
-
+.description-shell{
+    position: relative;
+    overflow: hidden;
+}
 .example-description{
         color: var(--on-background-text-color);
-        background-color: var(--accent-color);
+        background-color: rgba(33, 150, 243, 0.9);
+        font-weight: 400;
         font-size: 18px;
         line-height: 1.6;
-        letter-spacing: 0.03em;}
+        letter-spacing: 0.03em;
+        margin: 0px;
+
+        padding-left: 24px;
+        padding-right: 24px;
+        padding-top: 63px;
+
+        width: 370px;
+        height: 404px;
+
+        position: absolute;
+        top: 0px;
+        transform: translateY(370px);
+        transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+.example-item:hover .example-description{
+       transform: translateY(0px);
+     
+}
